@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ccbd816a07b206f971042295b899d1ba",
+    "content-hash": "2b0c93b6da9a38a0f2b697ab847ce488",
     "packages": [
         {
             "name": "brick/math",
@@ -896,6 +896,52 @@
                 }
             ],
             "time": "2022-10-26T14:07:24+00:00"
+        },
+        {
+            "name": "gvalmana/crud-api-laravel",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gvalmana/crud-api-laravel.git",
+                "reference": "0379047c2a04e5ba3552bee667c9d712a62a8faa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gvalmana/crud-api-laravel/zipball/0379047c2a04e5ba3552bee667c9d712a62a8faa",
+                "reference": "0379047c2a04e5ba3552bee667c9d712a62a8faa",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~7.3|~8.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CrudApiRestfull\\": "src/",
+                    "CrudApiRestfull\\Test\\": "src/Test",
+                    "CrudApiRestfull\\Models\\": "src/Models",
+                    "CrudApiRestfull\\Services\\": "src/Services",
+                    "CrudApiRestfull\\Middleware\\": "src/Middleware",
+                    "CrudApiRestfull\\Controllers\\": "src/Controllers"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gustavo Valmaña Villalonga",
+                    "email": "gustavo.shotokai@gmail.com"
+                }
+            ],
+            "description": "Libreria para CRUD en API de Laravel",
+            "support": {
+                "issues": "https://github.com/gvalmana/crud-api-laravel/issues",
+                "source": "https://github.com/gvalmana/crud-api-laravel/tree/master"
+            },
+            "time": "2022-05-12T19:11:34+00:00"
         },
         {
             "name": "laravel/framework",
@@ -7802,7 +7848,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "gvalmana/crud-api-laravel": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
