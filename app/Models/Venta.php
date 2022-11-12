@@ -9,7 +9,12 @@ class Venta extends RestModel
 {
     use HasFactory;
     
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
+
     public function producto(){
-        return $this->hasOne(Producto::class);        
+        return $this->hasOne(Producto::class,"id","producto_id");
     }
 }

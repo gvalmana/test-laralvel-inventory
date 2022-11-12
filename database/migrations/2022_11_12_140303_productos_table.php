@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string("serie",15)->unique();
             $table->double("precio_compra", 16, 4, true)->unsigned();
             $table->double("precio_venta", 16, 4, true)->unsigned();
-            $table->integer("existencia")->unsigned();
+            $table->integer("cantidad")->unsigned();
             $table->timestamps();
         });
     }

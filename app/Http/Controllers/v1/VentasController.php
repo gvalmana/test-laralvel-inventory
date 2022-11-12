@@ -5,10 +5,15 @@ namespace App\Http\Controllers\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreVentaRequest;
 use App\Http\Requests\UpdateVentaRequest;
+use App\Http\Resources\VentaCollection;
 use App\Models\Venta;
+use App\Traits\HttpResponsable;
+use App\Http\Resources\Venta as VentaResource;
+use Throwable;
 
 class VentasController extends Controller
 {
+    use HttpResponsable;
     /**
      * Display a listing of the resource.
      *
@@ -17,6 +22,12 @@ class VentasController extends Controller
     public function index()
     {
         //
+        try {
+            $data = Venta::all();
+            return $this->makeResponseOK(new VentaCollection($data), "Listado de productos obtenido correctamente");
+        } catch (\Throwable $th) {
+            return $this->makeResponse(false, "Ha ocurrido un error en la operación", 500, "Error al intentar obtener datos");
+        }
     }
 
     /**
@@ -39,6 +50,11 @@ class VentasController extends Controller
     public function show(Venta $venta)
     {
         //
+        try {
+            return $this->makeResponseOK(new VentaResource($venta),"Producto obtenido correctamente");
+        } catch (Throwable $exception) {
+            return $this->makeResponse(false, "Ha ocurrido un error en la operación", 500, "Error al intentar obtener datos");
+        }        
     }
 
     /**
