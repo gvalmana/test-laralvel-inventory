@@ -4,8 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\v1\Venta;
-use App\Models\v1\Producto;
+use App\Models\Producto;
+use App\Models\Venta;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
-        #Venta::factory(10)->make();
-        Producto::factory(100)->make();
+        Producto::factory(100)->create();
+        Venta::factory(10)->create();
     }
 }

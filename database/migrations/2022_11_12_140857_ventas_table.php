@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id()->unique();
             $table->date("fecha");
             $table->integer("cantidad")->unsigned();
-            $table->foreignId("product_id")->constrained();
+            $table->foreignId("producto_id")->constrained();
             $table->timestamps();
         });
     }

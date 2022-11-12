@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         //
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('productos', function (Blueprint $table) {
             $table->id()->unique();
             $table->string("nombre", 255);
             $table->string("serie",15)->unique();
-            $table->float("precio_compra", 8, 4, true)->unsigned();
-            $table->float("precio_existencia", 4, 2, true)->unsigned();
+            $table->double("precio_compra", 16, 4, true)->unsigned();
+            $table->double("precio_venta", 16, 4, true)->unsigned();
             $table->integer("existencia")->unsigned();
             $table->timestamps();
         });

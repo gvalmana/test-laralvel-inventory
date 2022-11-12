@@ -2,7 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\v1\Venta;
+use App\Models\Producto;
+use App\Models\Venta;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,6 +17,6 @@ class VentaSeeder extends Seeder
     public function run()
     {
         //
-        Venta::factory(10)->make();
+        #Venta::factory(10)->hasProducto(Producto::make());
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\v1\Producto;
+use App\Models\Producto;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,6 +16,6 @@ class ProductoSeeder extends Seeder
     public function run()
     {
         //
-        Producto::factory(100)->make();
+        #Producto::factory(10)->create();
     }
 }
