@@ -23,7 +23,10 @@ class Venta extends JsonResource
                 "fecha"=> $this->fecha,
                 "producto" => new ProductoResource($this->producto),
                 "cantidad" => $this->cantidad
-            ]
+            ],
+            '_links' => [
+                'self' => 'link-value',
+            ],            
         ];        
     }
 }

@@ -56,36 +56,4 @@ class ProductoInsertarTest extends TestCase
             ],
         ]);        
     }
-
-    public function test_actualizar_producto()
-    {
-        $this->withExceptionHandling();
-        $data = [
-            "nombre"=> "Test Product",
-            "serie" => "123456789",
-            "cantidad" => "1",
-            "precio_compra" => 234.5,
-            "precio_venta" => 345.0
-        ];
-        Producto::factory(1)->create();
-        $producto = Producto::all()->first();
-        $response = $this->putJson($this->base_url."/".$producto->id, ["nombre"=>"Actualizado"]);
-        $this->assertCount(1, Producto::all());
-        
-        $response->assertJson([
-            "message" => "Producto actualizado correctamente",
-            "success" => true,
-            "data" => [
-                    "type"=> "producto",
-                    "producto_id" => $producto->id,
-                    "attributes"=>[
-                        "nombre" => "Actualizado",
-                        "serie" => "123456789",
-                        "precio_compra" => "1",
-                        "precio_venta" => 234.5,
-                        "cantidad" => 345.0
-                ],      
-            ],
-        ]);        
-    }
 }

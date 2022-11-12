@@ -24,8 +24,7 @@ class ProductosController extends Controller
     {
         //
         try {
-            $data = Producto::all();
-            return $this->makeResponseOK(new ProductoCollection($data), "Listado de productos obtenido correctamente");
+            return $this->makeResponseOK(new ProductoCollection(Producto::paginate()), "Listado de productos obtenido correctamente");
         } catch (\Throwable $th) {
             return $this->makeResponse(false, "Ha ocurrido un error en la operación", 500, "Error al intentar obtener datos");
         }
@@ -74,7 +73,7 @@ class ProductosController extends Controller
     {
         //
         try {
-            $producto = $producto->update($request->all());
+            $producto->update($request->all());
             return $this->makeResponseCreated(new ProductoResource($producto), "Producto actualizado correctamente");
         } catch (\Throwable $th) {
             return $this->makeResponse(false, "Ha ocurrido un error en la operación", 500, "Error interno del servidor al intentar actualizar productos");
@@ -89,6 +88,11 @@ class ProductosController extends Controller
      */
     public function destroy(Producto $producto)
     {
-        //
+        try {
+            $producto->delete();
+            return $this->makeResponseOK(new ProductoResource($producto), "Producto elimiando correctamente");
+        } catch (\Throwable $th) {
+            return $this->makeResponse(false, "Ha ocurrido un error en la operación", 500, "Error interno del servidor al intentar actualizar productos");
+        }
     }
 }

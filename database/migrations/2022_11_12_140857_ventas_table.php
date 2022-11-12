@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer("cantidad")->unsigned();
             $table->foreignId("producto_id")->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

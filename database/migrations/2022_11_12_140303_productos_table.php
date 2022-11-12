@@ -22,6 +22,7 @@ return new class extends Migration
             $table->double("precio_venta", 16, 4, true)->unsigned();
             $table->integer("cantidad")->unsigned();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

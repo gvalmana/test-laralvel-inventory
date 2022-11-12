@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\v1\ProductosController;
 use App\Http\Controllers\v1\VentasController;
+use App\Http\Resources\ProductoCollection;
+use App\Models\Producto;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,3 +26,4 @@ Route::apiResources([
     "productos"=> ProductosController::class,
     "ventas"=> VentasController::class
 ]);
+

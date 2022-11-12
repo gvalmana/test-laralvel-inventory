@@ -24,7 +24,7 @@ class VentasController extends Controller
         //
         try {
             $data = Venta::all();
-            return $this->makeResponseOK(new VentaCollection($data), "Listado de productos obtenido correctamente");
+            return $this->makeResponseOK(new VentaCollection($data), "Listado de ventas obtenido correctamente");
         } catch (\Throwable $th) {
             return $this->makeResponse(false, "Ha ocurrido un error en la operación", 500, "Error al intentar obtener datos");
         }
@@ -51,7 +51,7 @@ class VentasController extends Controller
     {
         //
         try {
-            return $this->makeResponseOK(new VentaResource($venta),"Producto obtenido correctamente");
+            return $this->makeResponseOK(new VentaResource($venta),"Venta obtenido correctamente");
         } catch (Throwable $exception) {
             return $this->makeResponse(false, "Ha ocurrido un error en la operación", 500, "Error al intentar obtener datos");
         }        

@@ -30,7 +30,7 @@ class ProductTest extends TestCase
     {
         $this->withExceptionHandling();
         $productos = Producto::factory(2)->create();
-        $response = $this->get($this->base_url);
+        $response = $this->getJson($this->base_url);
         $response->assertStatus(200);
         $primero = $productos->first();
         $ultimo = $productos->last();
@@ -71,11 +71,35 @@ class ProductTest extends TestCase
     {
         $this->withExceptionHandling();
         $producto = Producto::factory(1)->create();
-        $response = $this->get($this->base_url."/".$producto->first()->id);
+        $response = $this->getJson($this->base_url."/".$producto->first()->id);
         $response->assertStatus(200);
         $primero = $producto->first();
         $response->assertJson([
             "message" => "Producto obtenido correctamente",
+            "success" => true,
+            "data" => [
+                    "type"=> "producto",
+                    "producto_id" => $primero->id,
+                    "attributes"=>[
+                        "nombre" => $primero->nombre,
+                        "serie" => $primero->serie,
+                        "precio_compra" => $primero->precio_compra,
+                        "precio_venta" => $primero->precio_venta,
+                        "cantidad" => $primero->cantidad
+                ],      
+            ],
+        ]);        
+    }
+
+    public function test_un_producto_puede_ser_eliminado()
+    {
+        $this->withExceptionHandling();
+        $producto = Producto::factory(1)->create();
+        $response = $this->deleteJson($this->base_url."/".$producto->first()->id);
+        $primero = $producto->first();
+        $response->assertStatus(200);
+        $response->assertJson([
+            "message" => "Producto elimiando correctamente",
             "success" => true,
             "data" => [
                     "type"=> "producto",

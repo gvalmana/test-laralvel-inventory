@@ -6,6 +6,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class Producto extends JsonResource
 {
+    public static $wrap = 'producto';
     /**
      * Transform the resource into an array.
      *
@@ -23,7 +24,7 @@ class Producto extends JsonResource
                 "precio_compra"=> $this->precio_compra,
                 "precio_venta" => $this->precio_venta,
                 "cantidad" => $this->cantidad
-            ]
+            ],
         ];
     }
 }
