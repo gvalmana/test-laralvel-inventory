@@ -1,3 +1,7 @@
+# Created by https://www.toptal.com/developers/gitignore/api/laravel,visualstudiocode,windows,linux
+# Edit at https://www.toptal.com/developers/gitignore?templates=laravel,visualstudiocode,windows,linux
+
+### Laravel ###
 /vendor/
 node_modules/
 npm-debug.log
@@ -21,3 +25,111 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
+
+### Linux ###
+*~
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
+
+### Windows ###
+# Windows thumbnail cache files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+
+# Dump file
+*.stackdump
+
+# Folder config file
+[Dd]esktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files/vendor/
+2
+node_modules/
+3
+npm-debug.log
+4
+yarn-error.log
+5
+​
+6
+# Laravel 4 specific
+7
+bootstrap/compiled.php
+8
+app/storage/
+9
+​
+10
+# Laravel 5 & Lumen specific
+11
+public/storage
+12
+public/hot
+13
+​
+14
+# Laravel 5 & Lumen specific with changed public path
+15
+public_html/storage
+16
+public_html/hot
+17
+​
+18
+storage/*.key
+19
+.env
+20
+Homestead.yaml
+21
+Homestead.json
+22
+/.vagrant
+23
+.phpunit.result.cache
+24
+
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# End of https://www.toptal.com/developers/gitignore/api/laravel,visualstudiocode,windows,linux
