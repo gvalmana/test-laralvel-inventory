@@ -17,13 +17,15 @@ class Producto extends Model
     protected $fillable = [
         'nombre',
         'serie',
-        'cantidad',
+        'existencia',
         'precio_venta',
         'precio_compra'
     ];
     protected $appends = [
         'deletable',
         '_links',
+        'compras',
+        'facturado'
     ];
     
     
@@ -34,7 +36,25 @@ class Producto extends Model
     public function getLinksAttribute()
     {
         return [
-            'href' => route('productos.show',['producto'=>$this])
+            'self' => route('productos.show',['producto'=>$this])
         ];
-    }      
+    }
+    
+    public function getDeletableAttribute()
+    {
+        if ($this->ventas()->exists()) {
+            return false;
+        }
+        return true;
+    }
+    
+    public function getComprasAttribute()
+    {
+        $total = $this->ventas()->count();
+        return $total;
+    }
+    public function getFacturadoAttribute()
+    {
+        return $this->ventas()->count() * $this->precio_venta;
+    }
 }

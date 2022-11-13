@@ -40,5 +40,12 @@ class Venta extends RestModel
         return [
             'href' => route('ventas.show',['venta'=>$this])
         ];
-    }    
+    }
+    public function getDeletableAttribute()
+    {
+        if ($this->producto()->exists()) {
+            return false;
+        }
+        return true;
+    }       
 }

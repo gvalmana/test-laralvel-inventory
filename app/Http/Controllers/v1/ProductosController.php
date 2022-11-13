@@ -9,7 +9,6 @@ use App\Models\Producto;
 use App\Traits\HttpResponsable;
 use App\Http\Resources\ProductoCollection;
 use App\Http\Resources\Producto as ProductoResource;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Throwable;
 
 class ProductosController extends Controller
@@ -24,8 +23,16 @@ class ProductosController extends Controller
     {
         //
         try {
-            return $this->makeResponseOK(new ProductoCollection(Producto::paginate()), "Listado de productos obtenido correctamente");
+            $parameters = request()->input();
+            if (empty($parameters)){
+                $productos = Producto::all();
+            } elseif (isset($parameters["pagesize"])) {
+                $pagesize = $parameters["pagesize"];
+                $productos = Producto::where([])->simplePaginate($pagesize);
+            }
+            return $this->makeResponseOK(new ProductoCollection($productos), "Listado de productos obtenido correctamente");
         } catch (\Throwable $th) {
+            throw $th;
             return $this->makeResponse(false, "Ha ocurrido un error en la operación", 500, "Error al intentar obtener datos");
         }
     }
@@ -77,7 +84,7 @@ class ProductosController extends Controller
             return $this->makeResponseCreated(new ProductoResource($producto), "Producto actualizado correctamente");
         } catch (\Throwable $th) {
             return $this->makeResponse(false, "Ha ocurrido un error en la operación", 500, "Error interno del servidor al intentar actualizar productos");
-        }        
+        }
     }
 
     /**

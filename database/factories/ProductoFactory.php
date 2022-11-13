@@ -21,7 +21,7 @@ class ProductoFactory extends Factory
             "serie" => strval(fake()->unique()->randomNumber(9, true)),
             "precio_compra" => fake()->randomFloat(4, 0.1, 1000),
             "precio_venta" => fake()->randomFloat(4, 0.1, 1000),
-            "cantidad" => fake()->numberBetween(0, 20),
+            "existencia" => fake()->numberBetween(0, 20),
             "created_at" => now(),
             "updated_at" => now()
         ];
