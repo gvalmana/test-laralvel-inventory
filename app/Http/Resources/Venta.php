@@ -21,12 +21,11 @@ class Venta extends JsonResource
             "venta_id"=> $this->id,
             "attributes"=> [
                 "fecha"=> $this->fecha,
-                "producto" => new ProductoResource($this->producto),
-                "cantidad" => $this->cantidad
+                "cantidad" => $this->cantidad,
+                "producto" => new ProductoSimple($this->producto),
             ],
-            '_links' => [
-                'self' => 'link-value',
-            ],            
+            "_links"=> $this->_links,
+            "deletable" => $this->deletable        
         ];        
     }
 }

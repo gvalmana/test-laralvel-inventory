@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Producto extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
     protected $hidden = [
         'created_at',
-        'updated_at'
+        'updated_at',
+        'deleted_at'
     ];
     protected $fillable = [
         'nombre',
@@ -21,6 +21,11 @@ class Producto extends Model
         'precio_venta',
         'precio_compra'
     ];
+    protected $appends = [
+        'deletable',
+        '_links',
+    ];
+    
     
     public function ventas(){
         return $this->hasMany(Venta::class);
