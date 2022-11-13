@@ -25,7 +25,9 @@ class UpdateVentaRequest extends FormRequest
     {
         return [
             //
-       
+            "fecha"=>"required",
+            "producto_id"=>"numeric|required",
+            "cantidad"=>"numeric|required"       
         ];
     }
 }
