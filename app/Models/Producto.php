@@ -24,12 +24,20 @@ class Producto extends Model
     protected $appends = [
         'deletable',
         '_links',
-        'compras',
-        'facturado'
+        'vendido',
+        'facturado',
+        'entradas',
+        'costo',
+        'utilidades',
+        'categoria'
     ];
     
     
     public function ventas(){
+        return $this->hasMany(Venta::class);
+    }
+
+    public function entradas(){
         return $this->hasMany(Venta::class);
     }
 
@@ -42,19 +50,77 @@ class Producto extends Model
     
     public function getDeletableAttribute()
     {
-        if ($this->ventas()->exists()) {
+        if ($this->ventas()->exists() or $this->entradas()->exists() or $this->cantidad>=0) {
             return false;
         }
         return true;
     }
     
-    public function getComprasAttribute()
+    public function getVendidoAttribute()
     {
-        $total = $this->ventas()->count();
-        return $total;
+        return $this->ventas()->count();
     }
+
+    public function getEntradasAttribute()
+    {
+        return $this->ventas()->count();
+    }
+
     public function getFacturadoAttribute()
     {
         return $this->ventas()->count() * $this->precio_venta;
+    }
+
+    public function getCostoAttribute()
+    {
+        return $this->entradas()->count() * $this->precio_compra;
+    }
+
+    public function getUtilidadesAttribute()
+    {
+        return $this->getFacturadoAttribute() - $this->getCostoAttribute();
+    }
+
+    public function getGananciasAttribute()
+    {
+        try {
+            if ($this->getCostoAttribute()<=0) {
+                return 0;
+            }
+            return ($this->getUtilidadesAttribute()-$this->getCostoAttribute())*100/ $this->getCostoAttribute();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function getCategoriaAttribute()
+    {
+        $porciento_ganancias = $this->getGananciasAttribute();
+        if ($porciento_ganancias>50){
+            return "Gama Alta";
+        } elseif ($porciento_ganancias > 10 and $porciento_ganancias <= 50) {
+            return "Gama Media";
+        } else if ($porciento_ganancias<=10){
+            return "Gama Baja";
+        } else {
+            return "Sin Clasificar";
+        }
+    }
+
+    public function rebajarInventario($cantidad)
+    {
+        $res = $this->existencias - $cantidad;
+        if ($res<=0) {
+            $this->existencias = 0;
+        }else{
+            $this->existencias -= $cantidad;
+        }
+        $this->save();
+    }
+
+    public function entrarInventario($cantidad)
+    {
+        $this->existencias += $cantidad;
+        $this->save();
     }
 }

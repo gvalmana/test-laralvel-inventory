@@ -6,7 +6,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\Producto as ProductoResource;
 use App\Models\Producto;
 
-class Venta extends JsonResource
+class Operacion extends JsonResource
 {
     /**
      * Transform the resource into an array.

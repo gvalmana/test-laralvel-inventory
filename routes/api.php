@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\v1\EntradasController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\v1\ProductosController;
@@ -24,6 +25,7 @@ use App\Models\Producto;
 
 Route::apiResources([
     "productos"=> ProductosController::class,
-    "ventas"=> VentasController::class
+    "ventas"=> VentasController::class,
+    "entradas"=> EntradasController::class
 ]);
 

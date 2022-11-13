@@ -20,11 +20,18 @@ class Producto extends JsonResource
             "attributes"=> [
                 "nombre"=> $this->nombre,
                 "serie" => $this->serie,
+                "categoría" => $this->categoria,
                 "precio_compra"=> $this->precio_compra,
                 "precio_venta" => $this->precio_venta,
                 "existencia" => $this->existencia,
-                "total_ventas" => $this->compras,
-                "total_facturado" => $this->facturado
+            ],
+            "rentabilidad" => [
+                "total_ventas" => $this->vendido,
+                "total_facturado" => round($this->facturado, 2),
+                "total_entradas" => $this->entradas,
+                "total_costo" => round($this->costo,2),
+                "utilidades" => round($this->utilidades,2),
+                "porciento_utilidades" => round($this->ganancias,2) ."%"
             ],
             "_links"=> $this->_links,
             "deletable" => $this->deletable

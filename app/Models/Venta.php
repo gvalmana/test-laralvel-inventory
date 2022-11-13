@@ -47,5 +47,5 @@ class Venta extends RestModel
             return false;
         }
         return true;
-    }       
+    } 
 }

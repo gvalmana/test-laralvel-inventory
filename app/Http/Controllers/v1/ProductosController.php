@@ -25,12 +25,12 @@ class ProductosController extends Controller
         try {
             $parameters = request()->input();
             if (empty($parameters)){
-                $productos = Producto::all();
+                $data = Producto::all();
             } elseif (isset($parameters["pagesize"])) {
                 $pagesize = $parameters["pagesize"];
-                $productos = Producto::where([])->simplePaginate($pagesize);
+                $data = Producto::where([])->simplePaginate($pagesize);
             }
-            return $this->makeResponseOK(new ProductoCollection($productos), "Listado de productos obtenido correctamente");
+            return $this->makeResponseOK(new ProductoCollection($data), "Listado de productos obtenido correctamente");
         } catch (\Throwable $th) {
             throw $th;
             return $this->makeResponse(false, "Ha ocurrido un error en la operación", 500, "Error al intentar obtener datos");
