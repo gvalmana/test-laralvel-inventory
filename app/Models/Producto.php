@@ -25,4 +25,11 @@ class Producto extends Model
     public function ventas(){
         return $this->hasMany(Venta::class);
     }
+
+    public function getLinksAttribute()
+    {
+        return [
+            'href' => route('productos.show',['producto'=>$this])
+        ];
+    }      
 }
