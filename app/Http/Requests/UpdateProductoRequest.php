@@ -25,10 +25,10 @@ class UpdateProductoRequest extends FormRequest
     {
         return [
             //
-            'nombre' => ['required', 'max:255'],
-            'serie' =>  ['required', 'max:15'],
-            'precio_compra' =>  ['required'],
-            'precio_venta' => ['required']           
+            'nombre' => 'string|required|max:255|unique:productos,nombre,'.$this->id.',id',
+            'serie' => 'numeric|required|digits_between:15,15|unique:productos,serie,'.$this->id.',id',
+            'precio_compra' =>  'numeric|required',
+            'precio_venta' => 'numeric|required'         
         ];
     }
 }

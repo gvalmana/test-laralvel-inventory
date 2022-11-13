@@ -16,7 +16,7 @@ return new class extends Migration
         //
         Schema::create('productos', function (Blueprint $table) {
             $table->id()->unique();
-            $table->string("nombre", 255);
+            $table->string("nombre", 255)->unique();
             $table->string("serie",15)->unique();
             $table->double("precio_compra", 16, 4, true)->unsigned();
             $table->double("precio_venta", 16, 4, true)->unsigned();

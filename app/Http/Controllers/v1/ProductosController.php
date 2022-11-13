@@ -50,6 +50,7 @@ class ProductosController extends Controller
             $producto = Producto::create($request->all());
             return $this->makeResponseCreated(new ProductoResource($producto), "Producto creado correctamente");
         } catch (\Throwable $th) {
+            throw $th;
             return $this->makeResponse(false, "Ha ocurrido un error en la operación", 500, "Error interno del servidor al intentar guardar productos");
         }
     }
