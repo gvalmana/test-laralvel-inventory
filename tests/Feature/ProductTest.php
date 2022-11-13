@@ -15,7 +15,7 @@ class ProductTest extends TestCase
      */
     Use RefreshDatabase;
 
-    public $base_url = '/api/productos';
+    public $base_url = '/api/v1/productos';
 
     public function test_url_correct()
     {
@@ -23,10 +23,10 @@ class ProductTest extends TestCase
 
         $response = $this->get($this->base_url);
 
-        $response->assertStatus(200);
+        $response->assertStatus(204);
     }
 
-    public function test_los_productos_pueden_ser_listados()
+    public function test_listar_productos()
     {
         $this->withExceptionHandling();
         $productos = Producto::factory(2)->create();
@@ -35,37 +35,27 @@ class ProductTest extends TestCase
         $primero = $productos->first();
         $ultimo = $productos->last();
         $this->assertCount(2, Producto::all());
-        $response->assertJson([
-            "success" => true,
-            "message" => "Listado de productos obtenido correctamente",
-            "data" => [
-                "items"=>[
-                    [
-                        "type"=> "producto",
-                        "producto_id" => $primero->id,
-                        "attributes"=>[
-                            "nombre" => $primero->nombre,
-                            "serie" => $primero->serie,
-                            "precio_compra" => $primero->precio_compra,
-                            "precio_venta" => $primero->precio_venta,
-                            "cantidad" => $primero->cantidad
-                        ]
-                    ],
-                    [
-                        "type"=> "producto",
-                        "producto_id" => $ultimo->id,
-                        "attributes"=>[
-                            "nombre" => $ultimo->nombre,
-                            "serie" => $ultimo->serie,
-                            "precio_compra" => $ultimo->precio_compra,
-                            "precio_venta" => $ultimo->precio_venta,
-                            "cantidad" => $ultimo->cantidad
-                        ]
-                    ],                    
+        $response->assertJson(
+            [
+                [
+                    "id" => $primero->id,
+                    "nombre" => $primero->nombre,
+                    "serie" => $primero->serie,
+                    "precio_compra" => $primero->precio_compra,
+                    "precio_venta" => $primero->precio_venta,
+                    "cantidad" => $primero->cantidad
                 ],
-            ],
-        ]);
-    }
+                [
+                    "id" => $ultimo->id,
+                    "nombre" => $ultimo->nombre,
+                    "serie" => $ultimo->serie,
+                    "precio_compra" => $ultimo->precio_compra,
+                    "precio_venta" => $ultimo->precio_venta,
+                    "cantidad" => $ultimo->cantidad                    
+                ],                     
+            ]            
+        );
+    }   
 
     public function test_un_producto_se_puede_obtener()
     {
@@ -75,18 +65,13 @@ class ProductTest extends TestCase
         $response->assertStatus(200);
         $primero = $producto->first();
         $response->assertJson([
-            "message" => "Producto obtenido correctamente",
             "success" => true,
             "data" => [
-                    "type"=> "producto",
-                    "producto_id" => $primero->id,
-                    "attributes"=>[
-                        "nombre" => $primero->nombre,
-                        "serie" => $primero->serie,
-                        "precio_compra" => $primero->precio_compra,
-                        "precio_venta" => $primero->precio_venta,
-                        "cantidad" => $primero->cantidad
-                ],      
+                "nombre" => $primero->nombre,
+                "serie" => $primero->serie,
+                "precio_compra" => $primero->precio_compra,
+                "precio_venta" => $primero->precio_venta,
+                "cantidad" => $primero->cantidad   
             ],
         ]);        
     }
@@ -102,15 +87,12 @@ class ProductTest extends TestCase
             "message" => "Producto elimiando correctamente",
             "success" => true,
             "data" => [
-                    "type"=> "producto",
-                    "producto_id" => $primero->id,
-                    "attributes"=>[
-                        "nombre" => $primero->nombre,
-                        "serie" => $primero->serie,
-                        "precio_compra" => $primero->precio_compra,
-                        "precio_venta" => $primero->precio_venta,
-                        "cantidad" => $primero->cantidad
-                ],      
+                "id" => $primero->id,
+                "nombre" => $primero->nombre,
+                "serie" => $primero->serie,
+                "precio_compra" => $primero->precio_compra,
+                "precio_venta" => $primero->precio_venta,
+                "cantidad" => $primero->cantidad     
             ],
         ]);        
     }    

@@ -20,5 +20,6 @@ class ProductosController extends RestController
         $this->not_found_message = 'Producto no encontrado';
         $this->created_message = 'Producto registrado correctamente';
         $this->updated_message = 'Producto actualizado correctamente';
+        $this->deleted_message = 'Producto elimiando correctamente';
     }    
 }

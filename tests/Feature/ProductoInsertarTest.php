@@ -17,7 +17,7 @@ class ProductoInsertarTest extends TestCase
      */
     Use RefreshDatabase;
 
-    public $base_url = '/api/productos';
+    public $base_url = '/api/v1/productos';
 
 
     public function test_insertar_producto()
@@ -25,8 +25,8 @@ class ProductoInsertarTest extends TestCase
         $this->withExceptionHandling();
         $data = [
             "nombre"=> "Test Product",
-            "serie" => "123456789",
-            "cantidad" => "1",
+            "serie" => "111111111111111",
+            "cantidad" => 1,
             "precio_compra" => 234.5,
             "precio_venta" => 345.0
         ];
@@ -41,18 +41,16 @@ class ProductoInsertarTest extends TestCase
         $this->assertEquals($data["precio_compra"],$producto->precio_compra);
         $this->assertEquals($data["precio_venta"],$producto->precio_venta);
         $response->assertJson([
-            "message" => "Producto creado correctamente",
+            "message" => "Producto registrado correctamente",
             "success" => true,
             "data" => [
-                    "type"=> "producto",
-                    "producto_id" => $producto->id,
-                    "attributes"=>[
-                        "nombre" => $producto->nombre,
-                        "serie" => $producto->serie,
-                        "precio_compra" => $producto->precio_compra,
-                        "precio_venta" => $producto->precio_venta,
-                        "cantidad" => $producto->cantidad
-                ],      
+                "id" => $producto->id,
+                "nombre" => $producto->nombre,
+                "serie" => $producto->serie,
+                "precio_compra" => $producto->precio_compra,
+                "precio_venta" => $producto->precio_venta,
+                "cantidad" => $producto->cantidad
+
             ],
         ]);        
     }

@@ -24,8 +24,6 @@ class Venta extends RestModel
     ];
 
     protected $appends = [
-        'deletable',
-        '_links',
     ];
 
     /**

@@ -36,8 +36,6 @@ class Producto extends RestModel
     protected $casts = [];
     
     protected $appends = [
-        'deletable',
-        '_links',
     ];
 
     protected function rules($scenario='create')
