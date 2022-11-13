@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use CrudApiRestfull\Models\RestModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Venta extends RestModel

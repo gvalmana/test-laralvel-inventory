@@ -5,11 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\RestModel;
 
-class Producto extends Model
+class Producto extends RestModel
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
+    protected $table = 'productos';
+    protected $connection = 'mysql';
+    protected $primaryKey = 'id';
+    public $timestamps = true;
+    protected $keyType = 'integer';
+    protected $perPage = 15;
+    const MODEL = 'producto';
+    const RELATIONS = ['ventas'];
     protected $hidden = [
         'created_at',
         'updated_at'
@@ -21,6 +29,33 @@ class Producto extends Model
         'precio_venta',
         'precio_compra'
     ];
+    protected $casts = [];
+
+
+    protected function rules($scenario='create')
+    {
+
+        $create = [
+            'nombre' => 'required|max:255',
+            'serie' => 'numeric|digits_between:15,15|nullable|unique:productos,serie',
+            'precio_compra' => 'required',
+            'precio_venta' => 'required',
+            'cantidad' => 'required',
+        ];
+        $update = $create;
+
+        $update['id'] = 'required|unique:productos,id,'.$this->id.',id';
+        $update['serie'] = 'numeric|digits_between:15,15|nullable|unique:productos,serie,'.$this->id.',id';
+        
+        
+        $rules = [
+            'create' => $create,
+            'update' => $update
+        ];
+        if(!isset($rules[$scenario]))
+            throw new \Exception('Scenario '.$scenario.' not exist');
+        return $rules[$scenario];        
+    }
     
     public function ventas(){
         return $this->hasMany(Venta::class);
