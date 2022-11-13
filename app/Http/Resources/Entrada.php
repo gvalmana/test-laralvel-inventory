@@ -3,10 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\Producto as ProductoResource;
-use App\Models\Producto;
 
-class Operacion extends JsonResource
+class Entrada extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,8 +15,8 @@ class Operacion extends JsonResource
     public function toArray($request)
     {
         return [
-            "type"=>"venta",
-            "venta_id"=> $this->id,
+            "type"=>"entrada",
+            "entrada_id"=> $this->id,
             "attributes"=> [
                 "fecha"=> $this->fecha,
                 "cantidad" => $this->cantidad,

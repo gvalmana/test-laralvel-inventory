@@ -46,6 +46,12 @@ class VentasController extends Controller
     public function store(StoreVentaRequest $request)
     {
         //
+        try {
+            $entrada = Venta::create($request->all());
+            return $this->makeResponseCreated(new VentaResource($entrada));
+        } catch (\Throwable $th) {
+            throw $th;
+        }        
     }
 
     /**

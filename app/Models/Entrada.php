@@ -38,7 +38,7 @@ class Entrada extends Model
     public function getLinksAttribute()
     {
         return [
-            'href' => route('entradas.show',['venta'=>$this])
+            'href' => route('entradas.show',['entrada'=>$this])
         ];
     }
     public function getDeletableAttribute()

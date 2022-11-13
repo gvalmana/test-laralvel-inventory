@@ -5,10 +5,11 @@ namespace App\Http\Controllers\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEntradaRequest;
 use App\Http\Requests\UpdateEntradaRequest;
+use App\Http\Resources\Entrada as EntradaResource;
 use App\Http\Resources\OperacionCollection;
 use App\Models\Entrada;
-use App\Models\Venta;
 use App\Traits\HttpResponsable;
+use Throwable;
 
 class EntradasController extends Controller
 {
@@ -24,10 +25,10 @@ class EntradasController extends Controller
         try {
             $parameters = request()->input();
             if (empty($parameters)){
-                $data = Venta::all();
+                $data = Entrada::all();
             } elseif (isset($parameters["pagesize"])) {
                 $pagesize = $parameters["pagesize"];
-                $data = Venta::where([])->simplePaginate($pagesize);
+                $data = Entrada::where([])->simplePaginate($pagesize);
             }
             return $this->makeResponseOK(new OperacionCollection($data), "Listado de entradas obtenido correctamente");
         } catch (\Throwable $th) {
@@ -45,6 +46,12 @@ class EntradasController extends Controller
     public function store(StoreEntradaRequest $request)
     {
         //
+        try {
+            $entrada = Entrada::create($request->all());
+            return $this->makeResponseCreated(new EntradaResource($entrada));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -56,6 +63,11 @@ class EntradasController extends Controller
     public function show(Entrada $entrada)
     {
         //
+        try {
+            return $this->makeResponseOK(new EntradaResource($entrada),"Venta obtenido correctamente");
+        } catch (Throwable $exception) {
+            return $this->makeResponse(false, "Ha ocurrido un error en la operación", 500, "Error al intentar obtener datos");
+        } 
     }
 
     /**

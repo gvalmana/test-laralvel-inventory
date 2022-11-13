@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use CrudApiRestfull\Models\RestModel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Venta extends RestModel
+class Venta extends Model
 {
     use HasFactory, SoftDeletes;
     protected $hidden = [
