@@ -95,12 +95,18 @@ class RestController extends BaseController
         try {
             $params = $request->all();
             $result = $this->service->update($params, $id);
-            DB::commit();
+            if ($result["success"]) {
+                DB::commit();
+            } else {
+                return $this->makeResponse(false,null,500,"Error al actualizar el recurso");
+            }
+            
         } catch (\Throwable $exception) {
             DB::rollBack();
             if ($exception instanceof ModelNotFoundException) {
                 return $this->makeResponseNotFound($this->not_found_message);
-            }            
+            }
+            throw $exception;   
         }
         return $this->makeResponseOK($result, $this->updated_message);
     }

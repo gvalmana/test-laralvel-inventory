@@ -51,7 +51,6 @@ class Producto extends RestModel
             'cantidad' => 'required',
         ];
         $update = $create;
-
         $update['id'] = 'required|unique:productos,id,'.$this->id.',id';
         $update['serie'] = 'numeric|digits_between:15,15|nullable|unique:productos,serie,'.$this->id.',id';
         
