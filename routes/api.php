@@ -18,12 +18,5 @@ use App\Models\Producto;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
-Route::apiResources([
-    "productos"=> ProductosController::class,
-    "ventas"=> VentasController::class
-]);
-
+Route::group(['prefix'=>'v1/'],__DIR__.'/productos.php');
+Route::group(['prefix'=>'v1/'],__DIR__.'/ventas.php');

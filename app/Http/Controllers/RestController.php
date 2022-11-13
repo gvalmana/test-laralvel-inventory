@@ -1,8 +1,8 @@
 <?php
-namespace CrudApiRestfull\Controllers;
+namespace App\Http\Controllers;
 
 use App\Services\Services;
-use APp\Traits\HttpResponsable;
+use App\Traits\HttpResponsable;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;

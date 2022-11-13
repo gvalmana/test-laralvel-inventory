@@ -18,6 +18,8 @@ class Producto extends RestModel
     protected $perPage = 15;
     const MODEL = 'producto';
     const RELATIONS = ['ventas'];
+    const PARENT = [];
+    
     protected $hidden = [
         'created_at',
         'updated_at'
