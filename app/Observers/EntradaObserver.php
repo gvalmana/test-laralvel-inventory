@@ -14,7 +14,7 @@ class EntradaObserver
      */
     public function created(Entrada $entrada)
     {
-        //
+        $entrada->producto()->entrarInventario($entrada->cantidad);
     }
 
     /**

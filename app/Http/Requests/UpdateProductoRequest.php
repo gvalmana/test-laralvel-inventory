@@ -28,8 +28,7 @@ class UpdateProductoRequest extends FormRequest
             'nombre' => ['required', 'max:255'],
             'serie' =>  ['required', 'max:15'],
             'precio_compra' =>  ['required'],
-            'precio_venta' => ['required'],
-            'cantidad' => ['required']               
+            'precio_venta' => ['required']           
         ];
     }
 }

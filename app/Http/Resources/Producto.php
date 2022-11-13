@@ -23,7 +23,7 @@ class Producto extends JsonResource
                 "categoría" => $this->categoria,
                 "precio_compra"=> $this->precio_compra,
                 "precio_venta" => $this->precio_venta,
-                "existencia" => $this->existencia,
+                "existencias" => $this->existencias,
             ],
             "rentabilidad" => [
                 "total_ventas" => $this->vendido,

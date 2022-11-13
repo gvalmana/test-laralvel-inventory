@@ -15,6 +15,7 @@ class VentaObserver
     public function created(Venta $venta)
     {
         //
+        $venta->producto()->rebajarInventario($venta->cantidad);
     }
 
     /**
