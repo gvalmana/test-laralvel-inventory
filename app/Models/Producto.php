@@ -16,14 +16,16 @@ class Producto extends RestModel
     public $timestamps = true;
     protected $keyType = 'integer';
     protected $perPage = 15;
-    const MODEL = 'producto';
+    const MODEL = 'Producto';
     const RELATIONS = ['ventas'];
     const PARENT = [];
     
     protected $hidden = [
         'created_at',
-        'updated_at'
+        'updated_at',
+        'deleted_at'
     ];
+
     protected $fillable = [
         'nombre',
         'serie',
@@ -32,7 +34,11 @@ class Producto extends RestModel
         'precio_compra'
     ];
     protected $casts = [];
-
+    
+    protected $appends = [
+        'deletable',
+        '_links',
+    ];
 
     protected function rules($scenario='create')
     {
@@ -60,7 +66,7 @@ class Producto extends RestModel
     }
     
     public function ventas(){
-        return $this->hasMany(Venta::class);
+        return $this->hasMany(Venta::class, "producto_id","id");
     }
 
     public function getLinksAttribute()
@@ -68,5 +74,13 @@ class Producto extends RestModel
         return [
             'href' => route('productos.show',['producto'=>$this])
         ];
-    }      
+    }
+    
+    public function getDeletableAttribute()
+    {
+        if ($this->ventas()->exists()) {
+            return false;
+        }
+        return true;
+    }     
 }
