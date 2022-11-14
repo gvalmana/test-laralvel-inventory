@@ -32,13 +32,13 @@
             </tr>
             <tr>
                 <td >${{ round($data["baja_total"], 2) }}</td>
-                <td >{UTILIDAD GB}</td>
+                <td >${{ round($data["baja_utilidad"], 2)}}</td>
                 <td >${{ round($data["media_total"], 2) }}</td>
-                <td >{UTILIDAD GM}</td>
+                <td >${{ round($data["media_utilidad"], 2)}}</td>
                 <td >${{ round($data["alta_total"], 2) }}</td>
-                <td >{ UTILIDAD GA }</td>
+                <td >${{ round($data["alta_utilidad"], 2)}}</td>
                 <td >${{ round($data["total"], 2) }}</td>
-                <td >{UTILIDAD}</td>
+                <td >${{ round($data["utilidades"], 2) }}</td>
             </tr>
         </tbody>
     </table>  
