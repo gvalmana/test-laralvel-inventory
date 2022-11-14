@@ -10,6 +10,7 @@ use App\Models\Venta;
 use App\Traits\HttpResponsable;
 use App\Http\Resources\Venta as VentaResource;
 use App\Models\Producto;
+use App\Rules\VentaValidacion;
 use Throwable;
 
 class VentasController extends Controller
@@ -49,6 +50,7 @@ class VentasController extends Controller
         //
         try {
             $producto = Producto::find($request["producto_id"]);
+            $validated = $request->validate(["cantidad" => ['required', new VentaValidacion($producto)]]);
             $valor = $producto->precio_venta * $request["cantidad"];            
             $venta = Venta::create(array_merge($request->all(),["valor"=>$valor]));
             return $this->makeResponseCreated(new VentaResource($venta));
