@@ -37,7 +37,7 @@ class Producto extends Model
     }
 
     public function entradas(){
-        return $this->hasMany(Venta::class);
+        return $this->hasMany(Entrada::class);
     }
 
     public function getLinksAttribute()
@@ -57,22 +57,22 @@ class Producto extends Model
     
     public function getVendidoAttribute()
     {
-        return $this->ventas()->count();
+        return $this->ventas()->sum("cantidad");
     }
 
     public function getEntradasAttribute()
     {
-        return $this->ventas()->count();
+        return $this->entradas()->sum("cantidad");
     }
 
     public function getFacturadoAttribute()
     {
-        return $this->ventas()->count() * $this->precio_venta;
+        return $this->ventas()->sum("cantidad") * $this->precio_venta;
     }
 
     public function getCostoAttribute()
     {
-        return $this->entradas()->count() * $this->precio_compra;
+        return $this->entradas()->sum("cantidad") * $this->precio_compra;
     }
 
     public function getUtilidadesAttribute()
@@ -86,7 +86,7 @@ class Producto extends Model
             if ($this->getCostoAttribute()<=0) {
                 return 0;
             }
-            return ($this->getUtilidadesAttribute()-$this->getCostoAttribute())*100/ $this->getCostoAttribute();
+            return ($this->getUtilidadesAttribute())*100/ $this->getCostoAttribute();
         } catch (\Throwable $th) {
             throw $th;
         }

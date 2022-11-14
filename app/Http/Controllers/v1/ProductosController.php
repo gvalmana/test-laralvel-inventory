@@ -84,7 +84,9 @@ class ProductosController extends Controller
         try {
             $validatedData = $request->validate([
                 'nombre' => [Rule::unique('productos')->ignore($producto->id)],
-                'serie' => [Rule::unique('productos')->ignore($producto->id)],             
+                'serie' => [Rule::unique('productos')->ignore($producto->id)],
+                'precio_compra' => ['required'],
+                'precio_venta' => ['required'],
             ]);            
             $producto->update($validatedData);
             return $this->makeResponseCreated(new ProductoResource($producto), "Producto actualizado correctamente");
