@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id()->unique();
             $table->integer("cantidad")->unsigned();
             $table->foreignId("producto_id")->constrained();
+            $table->double("valor")->unsigned()->default(0);            
             $table->timestamps();
             $table->softDeletes();
         });    
