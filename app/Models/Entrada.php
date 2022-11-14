@@ -10,7 +10,6 @@ class Entrada extends Model
 {
     use HasFactory, SoftDeletes;
     protected $hidden = [
-        'created_at',
         'updated_at',
         'deleted_at'
     ];
@@ -26,9 +25,12 @@ class Entrada extends Model
      * @var array
      */    
     protected $fillable = [
-        'fecha',
         'cantidad',
         'producto_id'
+    ];
+    
+    protected $casts = [
+        'created_at' => 'date',
     ];
 
     public function producto(){

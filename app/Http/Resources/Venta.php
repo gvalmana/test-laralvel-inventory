@@ -20,7 +20,7 @@ class Venta extends JsonResource
             "type"=>"venta",
             "venta_id"=> $this->id,
             "attributes"=> [
-                "fecha"=> $this->fecha,
+                "fecha"=> $this->created_at,
                 "cantidad" => $this->cantidad,
                 "producto" => new ProductoSimple($this->producto),
             ],

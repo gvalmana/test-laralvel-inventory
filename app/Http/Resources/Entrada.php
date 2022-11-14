@@ -18,7 +18,7 @@ class Entrada extends JsonResource
             "type"=>"entrada",
             "entrada_id"=> $this->id,
             "attributes"=> [
-                "fecha"=> $this->fecha,
+                "fecha"=> $this->created_at,
                 "cantidad" => $this->cantidad,
                 "producto" => new ProductoSimple($this->producto),
             ],

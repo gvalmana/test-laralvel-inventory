@@ -16,7 +16,6 @@ return new class extends Migration
         //
         Schema::create('ventas', function (Blueprint $table) {
             $table->id()->unique();
-            $table->date("fecha");
             $table->integer("cantidad")->unsigned();
             $table->foreignId("producto_id")->constrained();
             $table->timestamps();

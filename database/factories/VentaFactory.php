@@ -17,7 +17,6 @@ class VentaFactory extends Factory
     public function definition()
     {
         return [
-            "fecha"=> fake()->dateTime(),
             "cantidad"=> fake()->randomDigit(),
             "created_at"=> now(),
             "updated_at" => now(),
