@@ -82,18 +82,6 @@ class EntradasController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateEntradaRequest  $request
-     * @param  \App\Models\Entrada  $entrada
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateEntradaRequest $request, Entrada $entrada)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Entrada  $entrada

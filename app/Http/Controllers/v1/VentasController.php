@@ -85,17 +85,6 @@ class VentasController extends Controller
         }        
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateVentaRequest  $request
-     * @param  \App\Models\Venta  $venta
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateVentaRequest $request, Venta $venta)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -106,5 +95,11 @@ class VentasController extends Controller
     public function destroy(Venta $venta)
     {
         //
+        try {
+            $venta->delete();
+            return $this->makeResponseOK(new VentaResource($venta), "Venta cancelada correctamente");
+        } catch (\Throwable $th) {
+            return $this->makeResponse(false, "Ha ocurrido un error en la operación", 500, "Error interno del servidor al intentar actualizar productos");
+        } 
     }
 }
