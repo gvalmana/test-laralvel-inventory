@@ -39,6 +39,8 @@ class VentaObserver
     public function deleted(Venta $venta)
     {
         //
+        $model = $venta->producto;
+        $model->entrarInventario($venta->cantidad);        
     }
 
     /**
@@ -50,6 +52,8 @@ class VentaObserver
     public function restored(Venta $venta)
     {
         //
+        $model = $venta->producto;
+        $model->rebajarInventario($venta->cantidad);        
     }
 
     /**

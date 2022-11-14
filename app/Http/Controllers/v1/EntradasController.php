@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEntradaRequest;
 use App\Http\Requests\UpdateEntradaRequest;
 use App\Http\Resources\Entrada as EntradaResource;
-use App\Http\Resources\OperacionCollection;
+use App\Http\Resources\EntradaCollection;
 use App\Models\Entrada;
 use App\Traits\HttpResponsable;
 use Throwable;
@@ -30,7 +30,7 @@ class EntradasController extends Controller
                 $pagesize = $parameters["pagesize"];
                 $data = Entrada::where([])->simplePaginate($pagesize);
             }
-            return $this->makeResponseOK(new OperacionCollection($data), "Listado de entradas obtenido correctamente");
+            return $this->makeResponseOK(new EntradaCollection($data), "Listado de entradas obtenido correctamente");
         } catch (\Throwable $th) {
             throw $th;
             return $this->makeResponse(false, "Ha ocurrido un error en la operación", 500, "Error al intentar obtener datos");

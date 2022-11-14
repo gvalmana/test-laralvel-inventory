@@ -38,6 +38,8 @@ class EntradaObserver
     public function deleted(Entrada $entrada)
     {
         //
+        $model = $entrada->producto;
+        $model->rebajarInventario($entrada->cantidad);        
     }
 
     /**
@@ -49,6 +51,8 @@ class EntradaObserver
     public function restored(Entrada $entrada)
     {
         //
+        $model = $entrada->producto;
+        $model->entrarInventario($entrada->cantidad);        
     }
 
     /**

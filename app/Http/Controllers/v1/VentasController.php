@@ -5,7 +5,7 @@ namespace App\Http\Controllers\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreVentaRequest;
 use App\Http\Requests\UpdateVentaRequest;
-use App\Http\Resources\OperacionCollection;
+use App\Http\Resources\VentaCollection;
 use App\Models\Venta;
 use App\Traits\HttpResponsable;
 use App\Http\Resources\Venta as VentaResource;
@@ -31,7 +31,7 @@ class VentasController extends Controller
                 $pagesize = $parameters["pagesize"];
                 $data = Venta::where([])->simplePaginate($pagesize);
             }            
-            return $this->makeResponseOK(new OperacionCollection($data), "Listado de ventas obtenido correctamente");
+            return $this->makeResponseOK(new VentaCollection($data), "Listado de ventas obtenido correctamente");
         } catch (\Throwable $th) {
             return $this->makeResponse(false, "Ha ocurrido un error en la operación", 500, "Error al intentar obtener datos");
         }
