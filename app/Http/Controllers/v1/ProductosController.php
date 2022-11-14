@@ -9,6 +9,7 @@ use App\Models\Producto;
 use App\Traits\HttpResponsable;
 use App\Http\Resources\ProductoCollection;
 use App\Http\Resources\Producto as ProductoResource;
+use Illuminate\Validation\Rule;
 use Throwable;
 
 class ProductosController extends Controller
@@ -81,9 +82,14 @@ class ProductosController extends Controller
     {
         //
         try {
-            $producto->update($request->all());
+            $validatedData = $request->validate([
+                'nombre' => [Rule::unique('productos')->ignore($producto->id)],
+                'serie' => [Rule::unique('productos')->ignore($producto->id)],             
+            ]);            
+            $producto->update($validatedData);
             return $this->makeResponseCreated(new ProductoResource($producto), "Producto actualizado correctamente");
         } catch (\Throwable $th) {
+            throw $th;
             return $this->makeResponse(false, "Ha ocurrido un error en la operación", 500, "Error interno del servidor al intentar actualizar productos");
         }
     }

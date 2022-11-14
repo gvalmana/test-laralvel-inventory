@@ -25,8 +25,8 @@ class StoreEntradaRequest extends FormRequest
     {
         return [
             //
-            "producto_id" => "numeric|required|exists:productos,id",
-            "cantidad" => "numeric|required|min:1"
+            "producto_id" => ['numeric','required','exists:productos,id'],
+            "cantidad" => ['numeric','required','min:1'],
         ];
     }
 }

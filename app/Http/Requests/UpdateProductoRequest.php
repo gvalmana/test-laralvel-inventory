@@ -24,11 +24,10 @@ class UpdateProductoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
-            'nombre' => 'string|required|max:255|unique:productos,nombre,'.$this->id.',id',
-            'serie' => 'numeric|required|digits_between:15,15|unique:productos,serie,'.$this->id.',id',
-            'precio_compra' =>  'numeric|required',
-            'precio_venta' => 'numeric|required'         
+            'nombre' => ['string','required','max:255'],
+            'serie' => ['numeric','required','digits_between:15,15'],
+            'precio_compra' =>  ['numeric','required'],
+            'precio_venta' => ['numeric','required']         
         ];
     }
 }
