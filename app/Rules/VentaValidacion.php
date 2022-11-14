@@ -40,6 +40,6 @@ class VentaValidacion implements Rule
      */
     public function message()
     {
-        return "La venta de {$this->producto->nombre} no se puede realizar porque no hay oferta suficiente. Hay en existencias {$this->producto->existencias}";
+        return "La venta de {$this->producto->nombre} no se puede realizar porque no hay oferta suficiente. Hay en existencias {$this->producto->existencias} unidades.";
     }
 }
