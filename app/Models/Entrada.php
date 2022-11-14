@@ -26,7 +26,8 @@ class Entrada extends Model
      */    
     protected $fillable = [
         'cantidad',
-        'producto_id'
+        'producto_id',
+        'valor'
     ];
     
     protected $casts = [

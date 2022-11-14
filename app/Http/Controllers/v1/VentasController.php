@@ -9,6 +9,7 @@ use App\Http\Resources\VentaCollection;
 use App\Models\Venta;
 use App\Traits\HttpResponsable;
 use App\Http\Resources\Venta as VentaResource;
+use App\Models\Producto;
 use Throwable;
 
 class VentasController extends Controller
@@ -47,8 +48,10 @@ class VentasController extends Controller
     {
         //
         try {
-            $entrada = Venta::create($request->all());
-            return $this->makeResponseCreated(new VentaResource($entrada));
+            $producto = Producto::find($request["producto_id"]);
+            $valor = $producto->precio_venta * $request["cantidad"];            
+            $venta = Venta::create(array_merge($request->all(),["valor"=>$valor]));
+            return $this->makeResponseCreated(new VentaResource($venta));
         } catch (\Throwable $th) {
             throw $th;
         }        

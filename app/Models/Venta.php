@@ -26,9 +26,9 @@ class Venta extends Model
      * @var array
      */    
     protected $fillable = [
-        'fecha',
         'cantidad',
-        'producto_id'
+        'producto_id',
+        'valor'
     ];
 
     public function producto(){

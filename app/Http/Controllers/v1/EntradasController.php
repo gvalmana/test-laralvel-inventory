@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateEntradaRequest;
 use App\Http\Resources\Entrada as EntradaResource;
 use App\Http\Resources\EntradaCollection;
 use App\Models\Entrada;
+use App\Models\Producto;
 use App\Traits\HttpResponsable;
 use Throwable;
 
@@ -47,7 +48,10 @@ class EntradasController extends Controller
     {
         //
         try {
-            $entrada = Entrada::create($request->all());
+            $producto = Producto::find($request["producto_id"]);
+            $valor = $producto->precio_compra * $request["cantidad"];
+            $entrada = Entrada::create(array_merge($request->all(),["valor"=>$valor]));
+            
             return $this->makeResponseCreated(new EntradaResource($entrada));
         } catch (\Throwable $th) {
             throw $th;
