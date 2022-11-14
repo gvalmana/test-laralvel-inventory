@@ -26,7 +26,7 @@ class ProductTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_los_productos_pueden_ser_listados()
+    public function test_list()
     {
         $this->withExceptionHandling();
         $productos = Producto::factory(2)->create();
@@ -48,8 +48,18 @@ class ProductTest extends TestCase
                             "serie" => $primero->serie,
                             "precio_compra" => $primero->precio_compra,
                             "precio_venta" => $primero->precio_venta,
-                            "cantidad" => $primero->cantidad
-                        ]
+                            "existencias" => $primero->existencias
+                        ],
+                        "rentabilidad" => [
+                            "total_ventas" => $primero->vendido,
+                            "total_facturado" => $primero->facturado,
+                            "total_entradas" => $primero->entradas,
+                            "total_costo" => $primero->costo,
+                            "utilidades" => $primero->utilidades,
+                            "porciento_utilidades" => $primero->ganancias ."%"
+                        ],
+                        "_links"=> $primero->_links,
+                        "deletable" => $primero->deletable                        
                     ],
                     [
                         "type"=> "producto",
@@ -59,15 +69,25 @@ class ProductTest extends TestCase
                             "serie" => $ultimo->serie,
                             "precio_compra" => $ultimo->precio_compra,
                             "precio_venta" => $ultimo->precio_venta,
-                            "cantidad" => $ultimo->cantidad
-                        ]
+                            "existencias" => $ultimo->existencias
+                        ],
+                        "rentabilidad" => [
+                            "total_ventas" => $ultimo->vendido,
+                            "total_facturado" => $ultimo->facturado,
+                            "total_entradas" => $ultimo->entradas,
+                            "total_costo" => $ultimo->costo,
+                            "utilidades" => $ultimo->utilidades,
+                            "porciento_utilidades" => $ultimo->ganancias ."%"
+                        ],
+                        "_links"=> $ultimo->_links,
+                        "deletable" => $ultimo->deletable                                             
                     ],                    
                 ],
             ],
         ]);
     }
 
-    public function test_un_producto_se_puede_obtener()
+    public function test_get()
     {
         $this->withExceptionHandling();
         $producto = Producto::factory(1)->create();
@@ -85,13 +105,23 @@ class ProductTest extends TestCase
                         "serie" => $primero->serie,
                         "precio_compra" => $primero->precio_compra,
                         "precio_venta" => $primero->precio_venta,
-                        "cantidad" => $primero->cantidad
-                ],      
-            ],
-        ]);        
+                        "existencias" => $primero->existencias
+                    ],
+                    "rentabilidad" => [
+                        "total_ventas" => $primero->vendido,
+                        "total_facturado" => $primero->facturado,
+                        "total_entradas" => $primero->entradas,
+                        "total_costo" => $primero->costo,
+                        "utilidades" => $primero->utilidades,
+                        "porciento_utilidades" => $primero->ganancias ."%"
+                    ],
+                    "_links"=> $primero->_links,
+                    "deletable" => $primero->deletable                      
+                ],
+            ]);        
     }
 
-    public function test_un_producto_puede_ser_eliminado()
+    public function test_delete()
     {
         $this->withExceptionHandling();
         $producto = Producto::factory(1)->create();
@@ -109,9 +139,19 @@ class ProductTest extends TestCase
                         "serie" => $primero->serie,
                         "precio_compra" => $primero->precio_compra,
                         "precio_venta" => $primero->precio_venta,
-                        "cantidad" => $primero->cantidad
-                ],      
-            ],
-        ]);        
+                        "existencias" => $primero->existencias
+                    ],
+                    "rentabilidad" => [
+                        "total_ventas" => $primero->vendido,
+                        "total_facturado" => $primero->facturado,
+                        "total_entradas" => $primero->entradas,
+                        "total_costo" => $primero->costo,
+                        "utilidades" => $primero->utilidades,
+                        "porciento_utilidades" => $primero->ganancias ."%"
+                    ],
+                    "_links"=> $primero->_links,
+                    "deletable" => $primero->deletable                      
+                ],
+            ]);        
     }    
 }

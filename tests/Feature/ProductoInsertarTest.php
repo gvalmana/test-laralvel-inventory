@@ -20,13 +20,12 @@ class ProductoInsertarTest extends TestCase
     public $base_url = '/api/productos';
 
 
-    public function test_insertar_producto()
+    public function test_create()
     {
         $this->withExceptionHandling();
         $data = [
             "nombre"=> "Test Product",
-            "serie" => "123456789",
-            "cantidad" => "1",
+            "serie" => "123456789111111",
             "precio_compra" => 234.5,
             "precio_venta" => 345.0
         ];
@@ -37,7 +36,6 @@ class ProductoInsertarTest extends TestCase
         $producto = $productos->first();
         $this->assertEquals($data["nombre"],$producto->nombre);
         $this->assertEquals($data["serie"],$producto->serie);
-        $this->assertEquals($data["cantidad"],$producto->cantidad);
         $this->assertEquals($data["precio_compra"],$producto->precio_compra);
         $this->assertEquals($data["precio_venta"],$producto->precio_venta);
         $response->assertJson([
@@ -51,8 +49,17 @@ class ProductoInsertarTest extends TestCase
                         "serie" => $producto->serie,
                         "precio_compra" => $producto->precio_compra,
                         "precio_venta" => $producto->precio_venta,
-                        "cantidad" => $producto->cantidad
-                ],      
+                        "existencias" => $producto->existencias
+                    ],
+                    "rentabilidad" => [
+                        "total_ventas" => $producto->vendido,
+                        "total_facturado" => $producto->facturado,
+                        "total_entradas" => $producto->entradas,
+                        "total_costo" => $producto->costo,
+                        "utilidades" => $producto->utilidades,
+                        "porciento_utilidades" => $producto->ganancias ."%"
+                    ],                    
+
             ],
         ]);        
     }

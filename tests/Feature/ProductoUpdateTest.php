@@ -16,13 +16,12 @@ class ProductoUpdateTest extends TestCase
      */
     public $base_url = '/api/productos';
 
-    public function test_actualizar_producto()
+    public function test_update()
     {
         $this->withExceptionHandling();
         $data = [
             "nombre"=> "Actualizado",
-            "serie" => "987654321",
-            "cantidad" => 3,
+            "serie" => "111222333444555",
             "precio_compra" => 234.5,
             "precio_venta" => 345.0            
         ];
@@ -41,14 +40,23 @@ class ProductoUpdateTest extends TestCase
                         "serie" => $data_updated->serie,
                         "precio_compra" => $data_updated->precio_compra,
                         "precio_venta" => $data_updated->precio_venta,
-                        "cantidad" => $data_updated->cantidad
-                ],      
+                        "existencias" => $data_updated->existencias
+                ],
+                "rentabilidad" => [
+                    "total_ventas" => $data_updated->vendido,
+                    "total_facturado" => $data_updated->facturado,
+                    "total_entradas" => $data_updated->entradas,
+                    "total_costo" => $data_updated->costo,
+                    "utilidades" => $data_updated->utilidades,
+                    "porciento_utilidades" => $data_updated->ganancias ."%"
+                ],
+                "_links"=> $data_updated->_links,
+                "deletable" => $data_updated->deletable                       
             ],
         ]);
         $this->assertEquals($data_updated->nombre, $data["nombre"]);
         $this->assertEquals($data_updated->serie, $data["serie"]);
         $this->assertEquals($data_updated->precio_compra, $data["precio_compra"]);
         $this->assertEquals($data_updated->precio_venta, $data["precio_venta"]);
-        $this->assertEquals($data_updated->cantidad, $data["cantidad"]);
     }
 }
