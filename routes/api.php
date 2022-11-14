@@ -4,6 +4,7 @@ use App\Http\Controllers\v1\EntradasController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\v1\ProductosController;
+use App\Http\Controllers\v1\ReportesController;
 use App\Http\Controllers\v1\VentasController;
 use App\Http\Resources\ProductoCollection;
 use App\Models\Producto;
@@ -26,4 +27,5 @@ use App\Models\Producto;
 Route::apiResource("ventas", VentasController::class)->only(["index","store", "destroy","show"]);
 Route::apiResource("entradas", EntradasController::class)->only(["index","store", "destroy","show"]);
 Route::apiResource("productos", ProductosController::class);
+Route::get("reportes/finzanzas",[ReportesController::class, "reporte_finanzas"]);
 
