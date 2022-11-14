@@ -23,7 +23,7 @@ use App\Models\Producto;
 //     return $request->user();
 // });
 
-Route::apiResource("ventas", VentasController::class)->only(["index","store", "destroy"]);
-Route::apiResource("entradas", EntradasController::class)->only(["index","store", "destroy"]);
+Route::apiResource("ventas", VentasController::class)->only(["index","store", "destroy","show"]);
+Route::apiResource("entradas", EntradasController::class)->only(["index","store", "destroy","show"]);
 Route::apiResource("productos", ProductosController::class);
 

@@ -91,5 +91,11 @@ class EntradasController extends Controller
     public function destroy(Entrada $entrada)
     {
         //
+        try {
+            $entrada->delete();
+            return $this->makeResponseOK(new EntradaResource($entrada), "Entrada cancelada correctamente");
+        } catch (\Throwable $th) {
+            return $this->makeResponse(false, "Ha ocurrido un error en la operación", 500, "Error interno del servidor al intentar actualizar productos");
+        }        
     }
 }
