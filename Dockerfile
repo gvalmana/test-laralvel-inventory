@@ -1,5 +1,5 @@
-# Partimos de la imagen php en su versión 7.4
-FROM php:8.0-fpm
+# Partimos de la imagen php en su versión 8.1
+FROM php:fpm-alpine
 
 # Copiamos los archivos package.json composer.json y composer-lock.json a /var/www/
 COPY composer*.json /var/www/
