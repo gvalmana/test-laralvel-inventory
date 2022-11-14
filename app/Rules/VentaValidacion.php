@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\Models\Producto;
 use Illuminate\Contracts\Validation\Rule;
 
 class VentaValidacion implements Rule
@@ -11,13 +12,11 @@ class VentaValidacion implements Rule
      *
      * @return void
      */
-
-    private $producto;
-
-    public function __construct($producto)
+    private $ventas;
+    public function __construct($ventas)
     {
-
-       $this->producto = $producto;
+       $this->ventas = $ventas;
+       $this->productos = [];
     }
 
     /**
@@ -30,7 +29,10 @@ class VentaValidacion implements Rule
     public function passes($attribute, $value)
     {
         //
-        return ($this->producto->existencias > 0 and $value <= $this->producto->existencias);
+        foreach ($this->ventas as $venta) {
+            $producto = Producto::find($venta["producto_id"]);
+            return ($producto->existencias >= 0 and $venta["cantidad"] <= $producto->existencias);
+        }
     }
 
     /**
@@ -40,6 +42,6 @@ class VentaValidacion implements Rule
      */
     public function message()
     {
-        return "La venta de {$this->producto->nombre} no se puede realizar porque no hay oferta suficiente. Hay en existencias {$this->producto->existencias} unidades.";
+        return "La venta de los productos no se puede realizar porque no hay oferta suficiente.";
     }
 }

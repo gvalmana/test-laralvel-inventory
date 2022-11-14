@@ -48,11 +48,18 @@ class EntradasController extends Controller
     {
         //
         try {
-            $producto = Producto::find($request["producto_id"]);
-            $valor = $producto->precio_compra * $request["cantidad"];
-            $entrada = Entrada::create(array_merge($request->all(),["valor"=>$valor]));
-            
-            return $this->makeResponseCreated(new EntradaResource($entrada));
+            $data = $request->input("entradas");
+            $result = [];
+            foreach ($data as $entrada):
+                $temporal=[];
+                $temporal["producto_id"]=$entrada["producto_id"];
+                $temporal["cantidad"]=$entrada["cantidad"];
+                $producto = Producto::find($temporal["producto_id"]);
+                $valor = $producto->precio_compra * $entrada["cantidad"];
+                $temporal["valor"]= $valor;
+                $result[]= Entrada::create($temporal);        
+            endforeach;          
+            return $this->makeResponseCreated(new EntradaCollection($result));
         } catch (\Throwable $th) {
             throw $th;
         }

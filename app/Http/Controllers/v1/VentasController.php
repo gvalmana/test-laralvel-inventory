@@ -49,11 +49,21 @@ class VentasController extends Controller
     {
         //
         try {
-            $producto = Producto::find($request["producto_id"]);
-            $validated = $request->validate(["cantidad" => ['required', new VentaValidacion($producto)]]);
-            $valor = $producto->precio_venta * $request["cantidad"];            
-            $venta = Venta::create(array_merge($request->all(),["valor"=>$valor]));
-            return $this->makeResponseCreated(new VentaResource($venta));
+            $data = $request->input("ventas");
+            $result = [];
+            $validate = $request->validate([
+                "ventas"=> [new VentaValidacion($data)]
+            ]);
+            foreach ($data as $entrada):
+                $temporal=[];
+                $temporal["producto_id"]=$entrada["producto_id"];
+                $temporal["cantidad"]=$entrada["cantidad"];
+                $producto = Producto::find($temporal["producto_id"]);
+                $valor = $producto->precio_compra * $entrada["cantidad"];
+                $temporal["valor"]= $valor;
+                $result[]= Venta::create($temporal);        
+            endforeach;                     
+            return $this->makeResponseCreated(new VentaCollection($result));
         } catch (\Throwable $th) {
             throw $th;
         }        
