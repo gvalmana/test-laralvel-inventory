@@ -57,7 +57,7 @@ class ProductoInsertarTest extends TestCase
                         "total_entradas" => $producto->entradas,
                         "total_costo" => $producto->costo,
                         "utilidades" => $producto->utilidades,
-                        "porciento_utilidades" => $producto->ganancias ."%"
+                        "porciento_utilidades" => $producto->ganancias
                     ],                    
 
             ],

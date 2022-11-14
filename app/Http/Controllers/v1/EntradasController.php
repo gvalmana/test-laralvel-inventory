@@ -75,7 +75,7 @@ class EntradasController extends Controller
     {
         //
         try {
-            return $this->makeResponseOK(new EntradaResource($entrada),"Venta obtenido correctamente");
+            return $this->makeResponseOK(new EntradaResource($entrada),"Detalles de entrada obtenido correctamente");
         } catch (Throwable $exception) {
             return $this->makeResponse(false, "Ha ocurrido un error en la operación", 500, "Error al intentar obtener datos");
         } 

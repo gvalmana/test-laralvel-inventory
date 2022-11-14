@@ -48,7 +48,7 @@ class ProductoUpdateTest extends TestCase
                     "total_entradas" => $data_updated->entradas,
                     "total_costo" => $data_updated->costo,
                     "utilidades" => $data_updated->utilidades,
-                    "porciento_utilidades" => $data_updated->ganancias ."%"
+                    "porciento_utilidades" => $data_updated->ganancias
                 ],
                 "_links"=> $data_updated->_links,
                 "deletable" => $data_updated->deletable                       

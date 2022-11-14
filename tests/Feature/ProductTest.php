@@ -55,7 +55,7 @@ class ProductTest extends TestCase
                             "total_entradas" => $primero->entradas,
                             "total_costo" => $primero->costo,
                             "utilidades" => $primero->utilidades,
-                            "porciento_utilidades" => $primero->ganancias ."%"
+                            "porciento_utilidades" => $primero->ganancias
                         ],
                         "_links"=> $primero->_links,
                         "deletable" => $primero->deletable                        
@@ -76,7 +76,7 @@ class ProductTest extends TestCase
                             "total_entradas" => $ultimo->entradas,
                             "total_costo" => $ultimo->costo,
                             "utilidades" => $ultimo->utilidades,
-                            "porciento_utilidades" => $ultimo->ganancias ."%"
+                            "porciento_utilidades" => $ultimo->ganancias
                         ],
                         "_links"=> $ultimo->_links,
                         "deletable" => $ultimo->deletable                                             
@@ -112,7 +112,7 @@ class ProductTest extends TestCase
                         "total_entradas" => $primero->entradas,
                         "total_costo" => $primero->costo,
                         "utilidades" => $primero->utilidades,
-                        "porciento_utilidades" => $primero->ganancias ."%"
+                        "porciento_utilidades" => $primero->ganancias
                     ],
                     "_links"=> $primero->_links,
                     "deletable" => $primero->deletable                      
@@ -146,7 +146,7 @@ class ProductTest extends TestCase
                         "total_entradas" => $primero->entradas,
                         "total_costo" => $primero->costo,
                         "utilidades" => $primero->utilidades,
-                        "porciento_utilidades" => $primero->ganancias ."%"
+                        "porciento_utilidades" => $primero->ganancias
                     ],
                     "_links"=> $primero->_links,
                     "deletable" => $primero->deletable                      
