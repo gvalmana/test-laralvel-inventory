@@ -33,7 +33,6 @@ class EntradasController extends Controller
             }
             return $this->makeResponseOK(new EntradaCollection($data), "Listado de entradas obtenido correctamente");
         } catch (\Throwable $th) {
-            throw $th;
             return $this->makeResponse(false, "Ha ocurrido un error en la operación", 500, "Error al intentar obtener datos");
         }        
     }
@@ -61,7 +60,7 @@ class EntradasController extends Controller
             endforeach;          
             return $this->makeResponseCreated(new EntradaCollection($result));
         } catch (\Throwable $th) {
-            throw $th;
+            return $this->makeResponse(false, "Ha ocurrido un error en la operación", 500, "Error interno del servidor al intentar registrar ventas");
         }
     }
 

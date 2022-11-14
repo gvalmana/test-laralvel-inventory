@@ -65,7 +65,7 @@ class VentasController extends Controller
             endforeach;                     
             return $this->makeResponseCreated(new VentaCollection($result));
         } catch (\Throwable $th) {
-            throw $th;
+            return $this->makeResponse(false, "Ha ocurrido un error en la operación", 500, "Error interno del servidor al intentar registrar ventas");
         }        
     }
 
