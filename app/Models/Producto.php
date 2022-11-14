@@ -67,12 +67,12 @@ class Producto extends Model
 
     public function getFacturadoAttribute()
     {
-        return $this->ventas()->sum("cantidad") * $this->precio_venta;
+        return $this->ventas()->sum("valor");
     }
 
     public function getCostoAttribute()
     {
-        return $this->entradas()->sum("cantidad") * $this->precio_compra;
+        return $this->entradas()->sum("valor");
     }
 
     public function getUtilidadesAttribute()
@@ -122,4 +122,6 @@ class Producto extends Model
         $this->existencias += $cantidad;
         $this->save();
     }
+
+
 }

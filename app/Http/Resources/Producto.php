@@ -26,12 +26,12 @@ class Producto extends JsonResource
                 "existencias" => $this->existencias,
             ],
             "rentabilidad" => [
-                "total_ventas" => $this->vendido,
+                "total_ventas" => round($this->vendido),
                 "total_facturado" => round($this->facturado, 2),
-                "total_entradas" => $this->entradas,
+                "total_entradas" => round($this->entradas),
                 "total_costo" => round($this->costo,2),
                 "utilidades" => round($this->utilidades,2),
-                "porciento_utilidades" => round($this->ganancias,2) ."%"
+                "porciento_utilidades" => round($this->ganancias,2)
             ],
             "_links"=> $this->_links,
             "deletable" => $this->deletable
