@@ -34,7 +34,6 @@ class ProductTest extends TestCase
         $response->assertStatus(200);
         $primero = $productos->first();
         $ultimo = $productos->last();
-        $this->assertCount(2, Producto::all());
         $response->assertJson([
             "success" => true,
             "message" => "Listado de productos obtenido correctamente",
