@@ -19,6 +19,11 @@ class ProductosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $pagination = [
+        'perpage'=>15,
+        'page'=>0
+    ];
+
     use HttpResponsable;
     public function index()
     {
@@ -27,10 +32,15 @@ class ProductosController extends Controller
             $parameters = request()->input();
             if (empty($parameters)){
                 $data = Producto::all();
-            } elseif (isset($parameters["pagesize"])) {
-                $pagesize = $parameters["pagesize"];
-                $data = Producto::where([])->simplePaginate($pagesize);
+                return $this->makeResponseOK(new ProductoCollection($data), "Listado de productos obtenido correctamente");
             }
+            if (isset($parameters["pagesize"])) {
+                $this->pagination["pagesize"] = $parameters["pagesize"];
+            }
+            if (isset($parameters["page"])) {
+                $this->pagination["page"] = $parameters["page"];
+            }
+            $data = Producto::select("*")->offset($this->pagination["page"])->limit($this->pagination["pagesize"])->get();
             return $this->makeResponseOK(new ProductoCollection($data), "Listado de productos obtenido correctamente");
         } catch (\Throwable $th) {
             throw $th;
