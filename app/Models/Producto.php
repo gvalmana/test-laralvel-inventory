@@ -43,7 +43,9 @@ class Producto extends Model
     public function getLinksAttribute()
     {
         return [
-            'self' => route('productos.show',['producto'=>$this])
+            'view' => route('productos.show',['producto'=>$this]),
+            'update' => route('productos.update',['producto'=>$this]),
+            'delete' => route('productos.destroy',['producto'=>$this])  
         ];
     }
     
