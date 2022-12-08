@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\UserRepositoryInterface;
 use App\Models\User;
-use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     private $userRepository;
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;
     }
@@ -20,7 +20,11 @@ class UserController extends Controller
      */
     public function index()
     {
+        $start_time = microtime(true);
+
         $users = $this->userRepository->all();
+        $end_time = microtime(true);
+        dump($end_time-$start_time);
         return response()->json($users);
     }
 

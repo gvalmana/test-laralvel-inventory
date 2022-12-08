@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Cache\UserCache;
+use App\Contracts\UserRepositoryInterface;
 use App\Models\Entrada;
 use App\Models\Venta;
 use App\Observers\EntradaObserver;
@@ -17,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        return $this->app->bind(UserRepositoryInterface::class, UserCache::class);
     }
 
     /**
