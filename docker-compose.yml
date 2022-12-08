@@ -1,51 +1,28 @@
-version: '3.9'
+version: '3.8'
 services:
-  server:
-    image: nginx:alpine
-    restart: unless-stopped
-    ports:
-      - 81:80
-      - 444:443
-    networks:
-      - app-test-inventario-network
-    volumes:
-      - ./:/var/www
-      - ./nginx/conf.d/:/etc/nginx/conf.d/
-  mariadb:
+  mysql:
     image: mariadb
     restart: unless-stopped
-    env_file:
-      - .env    
+    container_name: dev_db
     ports:
-      - 3306:3306
+      - '${DB_PORT:-3306}:3306'
     volumes:
-      - dbdata:/var/lib/mysql
+      - dbdata-test-laravel-inventory:/var/lib/mysql
+    env_file:
+      - .env
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_USER: ${DB_USERNAME}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_DATABASE: ${DB_DATABASE}
-    networks:
-      - app-test-inventario-network
-  app:
-    build: .
-    restart: unless-stopped
-    networks:
-      - app-test-inventario-network
+      MARIADB_ROOT_PASSWORD: '${DB_PASSWORD_CRYPTO_CARD-root}'
+      MARIADB_USER: '${DB_USERNAME_CRYPTO_CARD-duser_card}'
+      MARIADB_PASSWORD: '${DB_PASSWORD_CRYPTO_CARD-root}'
+      MARIADB_DATABASE: '${DB_DATABASE_CRYPTO_CARD-laravel}'
+  redis:
+    image: 'redis'
+    container_name: dev_redis
+    ports:
+      - '${REDIS_PORT:-6379}:6379'
     volumes:
-      - ./:/var/www
-  node:
-    image: node:lts-alpine
-    working_dir: /var/www
-    volumes:
-      - ./:/var/www
-      - /var/www/node_modules
-    command: sh /var/www/node_start.sh
-    depends_on:
-      - app
-   
-networks:
-  app-test-inventario-network:
-    driver: bridge
+      - redis-test-laravel-inventory:/data
+
 volumes:
-  dbdata:    
+  dbdata-test-laravel-inventory:
+  redis-test-laravel-inventory:

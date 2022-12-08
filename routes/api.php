@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\v1\EntradasController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,4 +29,6 @@ Route::apiResource("ventas", VentasController::class)->only(["index","store", "d
 Route::apiResource("entradas", EntradasController::class)->only(["index","store", "destroy","show"]);
 Route::apiResource("productos", ProductosController::class);
 Route::get("reportes/finzanzas",[ReportesController::class, "reporte_finanzas"]);
+Route::get("users/search", [UserController::class, 'getWithSameNameAndEmail']);
+Route::apiResource("users", UserController::class);
 
