@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\v1\EntradasController;
 use Illuminate\Http\Request;
@@ -31,4 +32,7 @@ Route::apiResource("productos", ProductosController::class);
 Route::get("reportes/finzanzas",[ReportesController::class, "reporte_finanzas"]);
 Route::get("users/search", [UserController::class, 'getWithSameNameAndEmail']);
 Route::apiResource("users", UserController::class);
+Route::get("countries",[CountriesController::class, 'getCountriers']);
+Route::get("countries-by-name",[CountriesController::class, 'getCountriersByName']);
+Route::get("countries-by-capital",[CountriesController::class, 'getCountriersByCapital']);
 

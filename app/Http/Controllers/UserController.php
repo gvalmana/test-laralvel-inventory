@@ -20,11 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $start_time = microtime(true);
-
         $users = $this->userRepository->all();
-        $end_time = microtime(true);
-        dump($end_time-$start_time);
         return response()->json($users);
     }
 

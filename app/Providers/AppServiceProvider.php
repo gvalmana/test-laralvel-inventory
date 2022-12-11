@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Adapters\RestCountriesAdapter;
 use App\Cache\UserCache;
+use App\Contracts\CountriesService;
 use App\Contracts\UserRepositoryInterface;
 use App\Models\Entrada;
 use App\Models\Venta;
@@ -17,9 +19,14 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
+    public $bindings = [
+        UserRepositoryInterface::class => UserCache::class,
+        CountriesService::class => RestCountriesAdapter::class
+    ];
+
     public function register()
     {
-        return $this->app->bind(UserRepositoryInterface::class, UserCache::class);
+
     }
 
     /**

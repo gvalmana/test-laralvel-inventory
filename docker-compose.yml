@@ -3,7 +3,7 @@ services:
   mysql:
     image: mariadb
     restart: unless-stopped
-    container_name: dev_db
+    container_name: dev_db_test_inventory
     ports:
       - '${DB_PORT:-3306}:3306'
     volumes:
@@ -17,7 +17,7 @@ services:
       MARIADB_DATABASE: '${DB_DATABASE_CRYPTO_CARD-laravel}'
   redis:
     image: 'redis'
-    container_name: dev_redis
+    container_name: dev_redis_test_inventory
     ports:
       - '${REDIS_PORT:-6379}:6379'
     volumes:
